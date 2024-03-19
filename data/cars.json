@@ -1,0 +1,43 @@
+[
+  {
+    "id": 1,
+    "brand": "Toyota",
+    "model": "Corolla",
+    "year": 2019,
+    "mileage_km": 45000,
+    "color": "silver"
+  },
+  {
+    "id": 2,
+    "brand": "Volkswagen",
+    "model": "Golf",
+    "year": 2018,
+    "mileage_km": 60000,
+    "color": "black"
+  },
+  {
+    "id": 3,
+    "brand": "Ford",
+    "model": "Focus",
+    "year": 2020,
+    "mileage_km": 35000,
+    "color": "red"
+  },
+  {
+    "id": 4,
+    "brand": "BMW",
+    "model": "3 Series",
+    "year": 2017,
+    "mileage_km": 70000,
+    "color": "white"
+  },
+  {
+    "id": 5,
+    "brand": "Mercedes-Benz",
+    "model": "C-Class",
+    "year": 2021,
+    "mileage_km": 20000,
+    "color": "blue"
+  }
+]
+  
