@@ -1,6 +1,6 @@
 # Overview
 
-Simple REST API application 
+Simple REST API application allowing users to retrieve JSON data about car.
 
 
 
