@@ -21,15 +21,15 @@ Simple REST API application
 
 1. Clone repository with:
 
-    git clone https://github.com/KamSaf/nodejs_rest_api.git
+        git clone https://github.com/KamSaf/nodejs_rest_api.git
 
 2. Install dependencies with:
 
-    npm install
+        npm install
 
 3. Run server with:
 
-    node app.js
+        node app.js
 
 
 
