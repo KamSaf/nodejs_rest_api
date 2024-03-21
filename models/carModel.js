@@ -1,5 +1,5 @@
 const cars = require('../data/cars');
-const { writeDataToFile, verifyBodyData } = require('../utils/utils');
+const { writeDataToFile } = require('../utils/utils');
 
 function getAll() {
     return new Promise((resolve, reject) => {

@@ -8,6 +8,24 @@ function writeDataToFile(filename, content) {
     })
 }
 
+function getPostData(req) {
+    return new Promise((resolve, reject) => {
+        try {
+            let body = [];
+            req.on('data', (chunk) => {
+                body.push(chunk.toString());
+            })
+            
+            req.on('end', async () => {
+                resolve(JSON.parse(body));    
+            })
+    
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+
 function verifyBodyData(data) {
     let stringFields = [data.brand, data.model, data.color];
     for (let i=0; i < stringFields.length; i++) {
@@ -27,5 +45,6 @@ function verifyBodyData(data) {
 
 module.exports = {
     writeDataToFile,
-    verifyBodyData
+    verifyBodyData,
+    getPostData
 }

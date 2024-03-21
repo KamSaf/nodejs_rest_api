@@ -1,5 +1,5 @@
 const Car = require('../models/carModel');
-const { verifyBodyData } = require('../utils/utils');
+const { verifyBodyData, getPostData } = require('../utils/utils');
 
 
 // @desc Gets all Cars
@@ -38,23 +38,15 @@ async function getSingleCar(req, res, args) {
 // @route POST /api/car/
 async function createCar(req, res, args) {
     try {
-        let body = [];
-        req.on('data', (chunk) => {
-            body.push(chunk.toString());
-        })
+        const car = await getPostData(req);
 
-        req.on('end', async () => {
-            let car = JSON.parse(body);
-
-            if (!verifyBodyData(car)) {
-                res.writeHead(422, {'Content-Type': 'application/json'});
-                return res.end(JSON.stringify({message: 'Invalid data provided'}));
-            }
-
-            const newCar = await Car.save(car);
-            res.writeHead(201, {'Content-Type': 'application/json'});
-            return res.end(JSON.stringify(newCar));
-        })
+        if (!verifyBodyData(car)) {
+            res.writeHead(422, {'Content-Type': 'application/json'});
+            return res.end(JSON.stringify({message: 'Invalid data provided'}));
+        }
+        const newCar = await Car.save(car);
+        res.writeHead(201, {'Content-Type': 'application/json'});
+        return res.end(JSON.stringify(newCar));
     
     } catch (error) {
         console.log(error);
