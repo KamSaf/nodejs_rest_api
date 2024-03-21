@@ -2,7 +2,7 @@ const Car = require('../models/carModel');
 
 
 // @desc Gets all Cars
-// @route GET /api/cars
+// @route GET /api/cars/
 async function getAllCars(req, res, args) {
     try {
         const cars = await Car.getAll();
@@ -14,7 +14,7 @@ async function getAllCars(req, res, args) {
 }
 
 // @desc Gets single Car by id
-// @route GET /api/car/:id
+// @route GET /api/car/:id/
 async function getSingleCar(req, res, args) {
     try {
         const car = await Car.getById(parseInt(args[3]));
@@ -33,8 +33,28 @@ async function getSingleCar(req, res, args) {
     }
 }
 
+// @desc Create a Car
+// @route POST /api/car/
+async function createCar(req, res, args) {
+    try {
+        let body = [];
+        req.on('data', (chunk) => {
+            body.push(chunk.toString());
+        })
+
+        req.on('end', async () => {
+            const newCar = await Car.save(JSON.parse(body));
+            res.writeHead(201, {'Content-Type': 'application/json'});
+            return res.end(JSON.stringify(newCar));
+        })
+    
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 module.exports = {
     getAllCars,
-    getSingleCar
+    getSingleCar,
+    createCar,
 }

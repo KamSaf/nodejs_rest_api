@@ -8,17 +8,19 @@ const server = http.createServer((req, res) => {
 
     urls = routes.urls;
     responseGiven = false;
-    urls.forEach(url => {
-        if (req.url.match(url.urlReg)) {
-            if (req.method != url.method) {
+
+    for (let i=0; i < urls.length; i++) {
+        if (req.url.match(urls[i].urlReg)) {
+            if (req.method != urls[i].method) {
                 res.writeHead(405, 'Content-Type', 'text/json');
                 res.write(JSON.stringify({message: 'Method not allowed'}));
                 res.end();    
             }
-            url.func(req, res, req.url.split('/'));
+            urls[i].func(req, res, req.url.split('/'));
             responseGiven = true;
+            break;
         }
-    });
+    }
 
     if (!responseGiven) {
         res.writeHead(404, 'Content-Type', 'text/json');
