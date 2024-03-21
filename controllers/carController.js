@@ -1,4 +1,5 @@
 const Car = require('../models/carModel');
+const { verifyBodyData } = require('../utils/utils');
 
 
 // @desc Gets all Cars
@@ -43,7 +44,14 @@ async function createCar(req, res, args) {
         })
 
         req.on('end', async () => {
-            const newCar = await Car.save(JSON.parse(body));
+            let car = JSON.parse(body);
+
+            if (!verifyBodyData(car)) {
+                res.writeHead(422, {'Content-Type': 'application/json'});
+                return res.end(JSON.stringify({message: 'Invalid data provided'}));
+            }
+
+            const newCar = await Car.save(car);
             res.writeHead(201, {'Content-Type': 'application/json'});
             return res.end(JSON.stringify(newCar));
         })
