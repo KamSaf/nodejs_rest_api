@@ -10,13 +10,14 @@ const server = http.createServer((req, res) => {
     responseGiven = false;
 
     for (let i=0; i < urls.length; i++) {
-        if (req.url.match(urls[i].urlReg)) {
-            if (req.method != urls[i].method) {
+        let route = urls[i];
+        if (req.url.match(route.urlReg)) {
+            if (!route.methods.includes(req.method)) {
                 res.writeHead(405, 'Content-Type', 'text/json');
-                res.write(JSON.stringify({message: 'Method not allowed'}));
-                res.end();    
+                res.end(JSON.stringify({message: 'Method not allowed'}));    
             }
-            urls[i].func(req, res, req.url.split('/'));
+            let controllerFunc = route.funcs[route.methods.indexOf(req.method)];
+            controllerFunc(req, res, req.url.split('/'));
             responseGiven = true;
             break;
         }
