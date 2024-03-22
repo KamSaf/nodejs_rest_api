@@ -35,7 +35,7 @@ async function getSingleCar(req, res, args) {
 }
 
 // @desc Create a Car
-// @route POST /api/car/
+// @route POST /api/cars/
 async function createCar(req, res, args) {
     try {
         const car = await getPostData(req);
@@ -53,8 +53,27 @@ async function createCar(req, res, args) {
     }
 }
 
+// @desc Update Car data
+// @route PUT /api/cars/:id/
+async function updateCar(req, res, args) {
+    try {
+        const data = await getPostData(req);
+        if (!verifyBodyData(data)) {
+            res.writeHead(422, {'Content-Type': 'application/json'});
+            return res.end(JSON.stringify({message: 'Invalid data provided'}));
+        }
+        const updatedCar = await Car.update(parseInt(args[3]), data);
+        res.writeHead(201, {'Content-Type': 'application/json'});
+        return res.end(JSON.stringify(updatedCar));
+    
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 module.exports = {
     getAllCars,
     getSingleCar,
     createCar,
+    updateCar,
 }

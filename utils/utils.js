@@ -27,6 +27,9 @@ function getPostData(req) {
 }
 
 function verifyBodyData(data) {
+    if (Array.isArray(data)) {
+        return false
+    }
     let stringFields = [data.brand, data.model, data.color];
     for (let i=0; i < stringFields.length; i++) {
         if (stringFields[i].length > 150){

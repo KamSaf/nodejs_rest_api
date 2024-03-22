@@ -1,4 +1,4 @@
-const { getAllCars, getSingleCar, createCar } = require('./controllers/carController');
+const { getAllCars, getSingleCar, createCar, updateCar } = require('./controllers/carController');
 
 class UrlDispatcher {
     constructor (urlReg, callableFuncs, methods) {
@@ -10,7 +10,7 @@ class UrlDispatcher {
 
 urls = [
     new UrlDispatcher(/\/api\/cars$/, [getAllCars, createCar], ['GET', 'POST']),
-    new UrlDispatcher(/\/api\/cars\/([0-9]+)/, getSingleCar, 'GET'),
+    new UrlDispatcher(/\/api\/cars\/([0-9]+)/, [getSingleCar, updateCar], ['GET', 'PUT']),
 ]
 
 module.exports = {
