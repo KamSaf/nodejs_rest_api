@@ -16,7 +16,8 @@ function getById(id) {
 
 function save(car) {
     return new Promise((resolve, reject) => {
-        let lastId = parseInt(Object.keys(cars).sort()[cars.length - 1]); 
+        let lastId = parseInt(Object.keys(cars).sort()[cars.length]);
+        console.log(lastId); 
         const newCar = {id: (lastId + 1), ...car};
         cars.push(newCar);
         writeDataToFile('./data/cars.json', cars);
