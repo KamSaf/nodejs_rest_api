@@ -36,9 +36,21 @@ function update(id, data) {
         cars[index]['mileage_km'] = data['mileage_km'];
         cars[index]['color'] = data['color'];
         writeDataToFile('./data/cars.json', cars);
-
         resolve({car: cars[index]});
     })
+}
+
+function deleteObj(id) {
+    return new Promise((resolve, reject) => {
+        let index = cars.findIndex(car => car["id"] === id);
+        if (index == -1) {
+            reject({message: 'Object not found'});
+        }
+        const updatedCars = cars.filter(function(car) { return car.id != id; }); 
+        writeDataToFile('./data/cars.json', updatedCars);
+        resolve({message: "Object deleted"});
+    })
+    
 }
 
 
@@ -47,4 +59,5 @@ module.exports = {
     getById,
     save,
     update,
+    deleteObj,
 }

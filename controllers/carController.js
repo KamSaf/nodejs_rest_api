@@ -71,9 +71,23 @@ async function updateCar(req, res, args) {
     }
 }
 
+// @desc Delete Car
+// @route DELETE /api/cars/:id/
+async function deleteCar(req, res, args) {
+    try {
+        const result = await Car.deleteObj(parseInt(args[3]));
+        res.writeHead(201, {'Content-Type': 'application/json'});
+        return res.end(JSON.stringify(result));
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
 module.exports = {
     getAllCars,
     getSingleCar,
     createCar,
     updateCar,
+    deleteCar,
 }
