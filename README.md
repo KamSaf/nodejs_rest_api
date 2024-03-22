@@ -35,7 +35,14 @@ Simple REST API application allowing users to retrieve JSON data about car.
 
 # Endpoints:
 
-```/api/cars``` => get all cars
+| METHOD  | ENDPOINT | ACTION |
+| ------------- | ------------- | ------------- |
+| ```/api/cars``` | ```GET``` | Get all cars list |  
+| ```/api/cars/``` | ```POST``` | Add new car |
+| ```/api/cars/:id``` | ```GET``` | Get data of a car by id |  
+| ```/api/cars/:id``` | ```PUT``` | Update single car data by id |
+| ```/api/cars/:id``` | ```DELETE``` | Delete single car by id |
 
-```/api/cars/:id``` => get single car by id
+
+
 
