@@ -10,12 +10,6 @@ Simple REST API application allowing users to retrieve JSON data about car.
 
 
 
-# Features
-
-- work in progress
-
-
-
 # How to run:
 
 
